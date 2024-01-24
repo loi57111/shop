@@ -1,11 +1,20 @@
+// Making component
+// Make function and add code which is needed to repeat
+// To use state which was declared in the App function, props was used.
+// Added variable with name of state which is desired to use in the component (shoes)
+// => (shoes = {shoes})
+// use data from props => props.nameOfState : props.shoes
+
+// ============================ Main Code =================================================//
 import { Button, Navbar, Container, Nav } from "react-bootstrap";
 import "./App.css";
 import { useState } from "react";
-// import 이미지 from "./bg.png"; //이미지를 바로 넣기위한 이미지 경로
+// import 이미지 from "./bg.png"; //Image path
 import data from "./data.js";
 
+// ============================ App function =================================================//
 function App() {
-  let [shoes, setShoes] = useState(data);
+  let [shoes] = useState(data);
 
   return (
     <div className="App">
@@ -21,31 +30,30 @@ function App() {
       <div className="main-bg"></div>
       <div className="container">
         <div className="row">
+          {/* Used map to loop => shoes have 3 objects so loop will be done 3 times.*/}
           {shoes.map(function (a, i) {
-            return <Card shoes={shoes[i]} i={i} />;
+            console.log(a);
+            return <Card shoes={shoes} i={i} />; //Declared shoes for props
           })}
-
-          {/* 
-          <Card shoes={shoes[0]} i={1}
-          <Card shoes={shoes[1]} i={2} />
-          <Card shoes={shoes[2]} i={3} /> */}
         </div>
       </div>
     </div>
   );
 }
 
+/// ============================ Components ==========================================//
 let Card = (props) => {
   return (
     <div className="col-md-4">
       <img
         src={
-          "https://codingapple1.github.io/shop/shoes" + (props.i + 1) + ".jpg"
+          "https://codingapple1.github.io/shop/shoes" + (props.i + 1) + ".jpg" // To binding 3 different pictures
         }
         width="80%"
       />
-      <h4>{props.shoes.title}</h4>
-      <p>{props.shoes.price}</p>
+      {/* Added i props to get count number */}
+      <h4>{props.shoes[props.i].title}</h4>
+      <p>{props.shoes[props.i].price}</p>
     </div>
   );
 };
