@@ -13,6 +13,8 @@ import data from "./data.js";
 import { Routes, Route, Link, useNavigate, Outlet } from "react-router-dom";
 import Detail from "./routes/Detail.js";
 import axios from "axios";
+import Cart from "./routes/Cart.js";
+
 // ============================ App function =================================================//
 function App() {
   let [shoes, setShoes] = useState(data);
@@ -60,7 +62,7 @@ function App() {
                 <div className="row">
                   {/* Used map to loop => shoes have 3 objects so loop will be done 3 times.*/}
                   {shoes.map(function (a, i) {
-                    return <Card shoes={shoes} i={i} />; //Declared shoes for props
+                    return <Card shoes={shoes} i={i} key={i} />; //Declared shoes for props
                   })}
                 </div>
               </div>
@@ -117,6 +119,8 @@ function App() {
           <Route path="two" element={<div>생일기념 쿠폰받기</div>}></Route>
           {/* ============================================== */}
         </Route>
+        {/* =================== 장바구니 =================== */}
+        <Route path="/cart" element={<Cart />} />
       </Routes>
     </div>
   );

@@ -1,3 +1,12 @@
+/* 애니메이션 전 */
+.start {
+  opacity: 0;
+}
+.end {
+  opacity: 1;
+  transition: opacity 0.5s;
+}
+
 .main-bg {
   height: 300px;
   background-image: url("/src/bg.png");
