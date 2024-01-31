@@ -1,14 +1,28 @@
 import { Table } from "react-bootstrap";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { changeName, increase } from "./../store/userSlice.js";
+import { changeStock } from "./../store.js";
 
 let Cart = () => {
   let state = useSelector((state) => {
+    // store.js로 요청보내주는 함수
     return state; //리턴할 값을 정할수 있다. ex) state.user => user 값만 리턴
   }); // () => {return state}은 () => return state와 같다.
-
-  console.log(state.cart[0]);
+  let dispatch = useDispatch();
   return (
     <div>
+      {console.log(state.cart)}
+      <h6>
+        {state.user.name} {state.user.age}의 장바구니
+      </h6>
+
+      <button
+        onClick={() => {
+          dispatch(increase(100));
+        }}
+      >
+        버튼
+      </button>
       {
         <Table>
           <thead>
@@ -23,10 +37,18 @@ let Cart = () => {
             {state.cart.map((a, i) => {
               return (
                 <tr key={i}>
-                  <td>1</td>
+                  <td>{state.cart[i].id}</td>
                   <td>{state.cart[i].name}</td>
                   <td>{state.cart[i].count}</td>
-                  <td>안녕</td>
+                  <td>
+                    <button
+                      onClick={() => {
+                        dispatch(changeStock(state.cart[i].id));
+                      }}
+                    >
+                      +
+                    </button>
+                  </td>
                 </tr>
               );
             })}

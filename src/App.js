@@ -39,10 +39,17 @@ function App() {
 
             <Nav.Link
               onClick={() => {
-                navigate("/detail"); //navigate can make it move a page to the given path.
+                navigate("/detail/1"); //navigate can make it move a page to the given path.
               }}
             >
               Detail
+            </Nav.Link>
+            <Nav.Link
+              onClick={() => {
+                navigate("/cart"); //navigate can make it move a page to the given path.
+              }}
+            >
+              Cart
             </Nav.Link>
           </Nav>
         </Container>

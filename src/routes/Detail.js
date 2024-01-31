@@ -2,6 +2,8 @@ import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { Nav } from "react-bootstrap";
 import styled from "styled-components"; //css style을 JS에서 적용가능
+import { addItem } from "./../store.js";
+import { useDispatch } from "react-redux";
 
 let YellowBtn = styled.button`
   background: yellow;
@@ -15,6 +17,7 @@ let Detail = (props) => {
   let { id } = useParams(); //현재 URL의 파라미터를 뽑아줌
   let [alert, setAlert] = useState(true);
   let [fade1, setFade1] = useState("");
+  let dispatch = useDispatch();
 
   let foundProduct = props.shoes.find(function (x) {
     return x.id == id; // array자료.id == url에입력한번호
@@ -62,10 +65,24 @@ let Detail = (props) => {
           />
         </div>
         <div className="col-md-6">
+          {console.log(foundProduct)}
           <h4 className="pt-5">{foundProduct.title}</h4>
           <p>{foundProduct.content}</p>
           <p>{foundProduct.price}</p>
-          <button className="btn btn-danger">주문하기</button>
+          <button
+            className="btn btn-danger"
+            onClick={() => {
+              dispatch(
+                addItem({
+                  id: foundProduct.id,
+                  name: foundProduct.title,
+                  count: 1,
+                })
+              );
+            }}
+          >
+            주문하기
+          </button>
         </div>
       </div>
       <Nav variant="tabs" defaultActiveKey="link0">
